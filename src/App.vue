@@ -18,6 +18,7 @@ import Footer from '@/components/UI/footer-main';
 export default {
   components: {Header, Footer, Home: Home},
 }
+
 </script>
 
 <style lang="scss">

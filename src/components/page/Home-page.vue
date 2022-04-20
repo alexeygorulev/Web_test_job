@@ -1,23 +1,63 @@
 <template>
+<Content />
   <Form @onSubmit="handleSubmit" />
   <List @onRemove="handleRemove" :items="notes" />
 </template>
 
 <script>
-import Form from "@/components/Notes/Form-main.vue"
-import List from "@/components/Notes/List-main.vue"
+import Content from '@/components/page/Content.vue'
+import Form from '@/components/Notes/Form.vue'
+import List from '@/components/Notes/List.vue'
+
 export default {
-  components: {Form, List: List},
-  data () {
+  components: { Form, List, Content },
+  data() {
     return {
-      notes: ['task1', 'task2', 'task3',]
+      notes: [
+        {
+          title: 'Comments 1',
+          name: 'name',
+          date: 'date',
+        },
+        {
+          title: 'Comments 2',
+          name: 'name',
+          date: 'date',
+        }
+      ]
+    }
+  },
+  mounted() {
+    this.getNotes()
+  },
+  watch: {
+    notes: {
+      handler(updatedList) {
+        localStorage.setItem('notes', JSON.stringify(updatedList))
+      },
+      deep: true
     }
   },
   methods: {
-    handleSubmit (note) {
-      this.notes.unshift(note)
+    // * get / set notes
+    getNotes() {
+      const localNotes = localStorage.getItem('notes')
+      if (localNotes) {
+        this.notes = JSON.parse(localNotes)
+      }
     },
-    handleRemove (index) {
+// * submit note
+handleSubmit(title,name, date) {
+  const note = {
+    title: title,
+    name: name,
+    date: date,
+  }
+
+    return this.notes.unshift(note)
+},
+    // * remove note
+    handleRemove(index) {
       this.notes.splice(index, 1)
     }
   }

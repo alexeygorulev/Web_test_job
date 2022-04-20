@@ -1,13 +1,3 @@
-// px to rem
-// @function rem($pixels, $context: $mainFontSize) {
-//   @if (unitless($pixels)) {
-//     $pixels: $pixels * 1px;
-//   }
-//   @if (unitless($context)) {
-//     $context: $context * 1px;
-//   }
-//   @return $pixels / $context * 1rem;
-// }
 
 .md-body {
   -ms-text-size-adjust: 100%;
@@ -31,7 +21,7 @@
 .md-body pre,
 .md-body ul {
   margin-top: 0;
-  margin-bottom: rem(16);
+  margin-bottom: rem(25);
 }
 
 .md-body a {
