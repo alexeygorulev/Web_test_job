@@ -12,46 +12,7 @@ import DataService from '@/services/DataService'
 
 import {defineComponent,onMounted} from 'vue'
 export default defineComponent ({
-  setup() {
-
-    // onMounted(() => getUsers())
-    // const getUsers = () => {
-    //   DataService.getAllUsers()
-    //   .then((res) => {
-    //     const dates = res.data.values
-    //     console.log(dates)
-
-    //   })
-    //   .catch((e) => console.log(e))
-    // }
-
-    // POST запрос в бд
-    // -----------------------------------------------------------------------
-    // const dataa = {name: 'andrey', title: 'ref'}
-    // onMounted(() => setUsers())
-    // const setUsers = () => {
-    //   DataService.setAllUsers(dataa)
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-    //   .catch((e) => console.log(e))
-    // }
-// -----------------------------------------------------------------
-    // const id = {id: '14'}
-    // onMounted(() => deleteUsers())
-    // const deleteUsers  = () => {
-      // DataService.deleteUser(id)
-      // .then((res) => {
-      //   console.log(res)
-      // })
-      // .catch((e) => console.log(e))
-    // }
-
-
-
-
-// --------------------------------------------------------------------
-  },
+  setup() {},
 
   components: { Form, List, Content },
   data() {
@@ -71,17 +32,16 @@ export default defineComponent ({
     this.getNotes()
   },
   watch: {
-    // notes: {
-    //   handler(updatedList) {
-    //     localStorage.setItem('notes', JSON.stringify(updatedList))
-    //   },
-    //   deep: true
-    // }
+    notes: {
+      handler(updatedList) {
+        this.getNotes()
+      },
+      deep: true
+    }
   },
   methods: {
     // * get / set notes
     getNotes() {
-
       DataService.getAllUsers()
       .then((res) => {
         const dates = res.data
@@ -97,8 +57,11 @@ handleSubmit(title,name, date_now) {
     name: name,
     date_now: date_now,
   }
-
-  DataService.setAllUsers(note)
+  let formData = new FormData()
+  formData.append('title', title)
+  formData.append('name', name)
+  formData.append('date_now', date_now)
+  DataService.setAllUsers(formData)
   .then((res) => {
     console.log(res)
   })
