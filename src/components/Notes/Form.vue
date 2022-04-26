@@ -16,13 +16,13 @@ export default {
     return {
       value: '',
       name: '',
-      date: new Date()
+      date_now: new Date()
     }
   },
   methods: {
     onSubmit() {
-    const fullYear = String(this.date.getDate()).padStart(2, '0') + '/' + String(this.date.getMonth() + 1).padStart(2, '0') + '/' + this.date.getFullYear();
-    const fullTime = fullYear + " Время " + String(this.date.getHours()).padStart(2, '0') + ':' + String(this.date.getMinutes() + 1).padStart(2, '0') + ':' + this.date.getSeconds()
+    const fullYear = String(this.date_now.getDate()).padStart(2, '0') + '/' + String(this.date_now.getMonth() + 1).padStart(2, '0') + '/' + this.date_now.getFullYear();
+    const fullTime = fullYear + " Время " + String(this.date_now.getHours()).padStart(2, '0') + ':' + String(this.date_now.getMinutes() + 1).padStart(2, '0') + ':' + this.date_now.getSeconds()
       this.$emit('onSubmit', this.value, this.name, fullTime )
       this.value = ''
       this.name = ''
